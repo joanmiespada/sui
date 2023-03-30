@@ -47,14 +47,16 @@ pub fn new_udp_network_address() -> sui_types::multiaddr::Multiaddr {
 }
 
 pub fn available_local_socket_address() -> std::net::SocketAddr {
-    let host = "127.0.0.1";
+    //let host = "127.0.0.1";
+    let host = "0.0.0.0";
     format!("{}:{}", host, get_available_port(host))
         .parse()
         .unwrap()
 }
 
 pub fn available_network_socket_address() -> std::net::SocketAddr {
-    let host = "127.0.0.1";
+    //let host = "127.0.0.1";
+    let host = "0.0.0.0";
     format!("{}:{}", host, get_available_port(host))
         .parse()
         .unwrap()
@@ -79,5 +81,6 @@ pub fn get_local_ip_for_tests() -> IpAddr {
 
 #[cfg(not(msim))]
 pub fn get_local_ip_for_tests() -> IpAddr {
-    "127.0.0.1".parse().unwrap()
+    //"127.0.0.1".parse().unwrap()
+    "0.0.0.0".parse().unwrap()
 }

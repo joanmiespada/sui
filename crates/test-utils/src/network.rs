@@ -14,7 +14,7 @@ use rand::{distributions::*, rngs::OsRng, seq::SliceRandom};
 use tokio::time::timeout;
 use tokio::{task::JoinHandle, time::sleep};
 use tracing::info;
-
+use std::net::SocketAddr;
 use mysten_metrics::RegistryService;
 use shared_crypto::intent::Intent;
 use sui::config::SuiEnv;
@@ -389,6 +389,9 @@ impl TestClusterBuilder {
             .with_objects(self.additional_objects.clone())
             .with_protocol_version(self.initial_protocol_version)
             .with_db_checkpoint_config(self.db_checkpoint_config_validators.clone())
+            .with_fullnode_rpc_addr( 
+                SocketAddr::from(([0, 0, 0, 0], 9000)) // it doesn't work!
+             )
             .with_supported_protocol_versions_config(
                 self.supported_protocol_versions_config.clone(),
             );
